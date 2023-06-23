@@ -56,16 +56,20 @@ userName.addEventListener("keypress", function (e) {
 
 let SuperHero = [
     {
-        'question': ' What is the name of the SpiderMan? ',
-        'answer': "Peter Parker"
+        'question': 'What was the first Marvel movie ever made?',
+        'answer': "Iron Man"
     },
     {
-        'question': 'What is the name of the IronMan? ',
-        'answer': "Tony Stark"
+        'question': 'Which billionaire makes a cameo in Iron Man 2?',
+        'answer': "Elon Musk"
     },
     {
-        'question': 'What is the name of the Batman? ',
-        'answer': "Batman"
+        'question': 'What is Thanos’s home planet?',
+        'answer': "Titan"
+    },
+    {
+        'question': 'What does the acronym J.A.R.V.I.S. stand for?',
+        'answer': "Just A Really Very Intelligent System"
     }
 ];
 
@@ -86,6 +90,8 @@ function play() {
 }
 
 let submit = document.querySelector('.submit')
+let score_No = document.querySelector('#score')
+let score = 0;
 submit.addEventListener("click", validateAns)
 
 function validateAns() {
@@ -100,10 +106,13 @@ function validateAns() {
         let answer = SuperHero[i].answer;
         let question = SuperHero[i].question;
         if (userAnswer.value == answer && quizQuestion.textContent == question) {
+            score++;
             checkAns.innerText = "Correct";
+            score_No.innerText = "Score: " + score;
             break
         } else {
             checkAns.innerText = "Incorrect";
+            score_No.innerText = "Score: " + score;
         }
     }
 }
@@ -121,7 +130,7 @@ function run() {
     userAnswer.value = ""
 
     count++
-    quizQuestion.innerText = SuperHero[count].question // ye read kse kr rha h fir?
+    quizQuestion.innerText = SuperHero[count].question 
 
 }
 
