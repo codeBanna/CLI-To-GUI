@@ -45,6 +45,7 @@
 
 // -----------------------------------------------------------------------------------------------------------------------------
 let count = 0
+let queCount = 1;
 let userName = document.querySelector('#userName');
 let welcomeMsg = document.querySelector('#welcomeMsg');
 
@@ -73,9 +74,25 @@ let SuperHero = [
     }
 ];
 
+let a = 0;
+let timeleft = 15;
+function updateTime() {
+
+    time.innerText = timeleft + "s";
+    timeleft--;
+
+    if (timeleft == 0) {
+        nextQue();
+        timeleft = 15;
+        updateTime();
+    }
+
+}
+
 
 let startQuiz = document.querySelector('.start-quiz');
 startQuiz.addEventListener("click", play)
+let time = document.querySelector('#time')
 
 
 function play() {
@@ -87,6 +104,10 @@ function play() {
     //     }
     // }
     quizQuestion.innerText = SuperHero[count].question
+
+    // timer
+    a = setInterval(updateTime, 1000)
+
 }
 
 let submit = document.querySelector('.submit')
@@ -118,19 +139,38 @@ function validateAns() {
 }
 
 let next = document.querySelector('.next');
-next.addEventListener("click", run);
+next.addEventListener("click", nextQue);
 
-function run() {
+function nextQue() {
+    queCount++;
 
     let quizQuestion = document.querySelector('.question');
     let userAnswer = document.querySelector('.userAnswer');
     let checkAns = document.querySelector('.checkAns');
     quizQuestion.innerText = "";
-    checkAns.innerText = ""
-    userAnswer.value = ""
+    checkAns.innerText = "";
+    userAnswer.value = "";
 
     count++
-    quizQuestion.innerText = SuperHero[count].question 
+    quizQuestion.innerText = SuperHero[count].question;
+
+
+    // clearInterval(a);
+    // timeleft = 15;
+    // time.innerText = timeleft + "s";
+    // a = setInterval(updateTime, 1000);
+
+
+    if (queCount == SuperHero.length) {
+        clearInterval(a);
+        // timeleft = 15;
+        // a = setInterval(updateTime, 1000);
+        time.innerText = "Done"
+    } else {
+        clearInterval(a);
+        timeleft = 15;
+        time.innerText = timeleft + "s";
+        a = setInterval(updateTime, 1000);
+    }
 
 }
-
