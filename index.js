@@ -1,49 +1,3 @@
-// const userName = readLineSync.question("Pls enter your name: ");
-
-// let welcomeMsg = "Welcome to SpiderVerse " + userName;
-// console.log(welcomeMsg + "\n");
-
-// let score = 0;
-// function play(question, answer) {
-//     userAnswer = readLineSync.question(question);
-//     if (answer == userAnswer) {
-//         console.log("Your are correct!")
-//         score++
-//     } else {
-//         console.log("Sorry, answer is not correct!");
-//     }
-//     console.log(score);
-//     console.log("----------------");
-// }
-
-// let SuperHero = [
-//     {
-//         'question': ' What is the name of the SpiderMan? ',
-//         'answer': "Peter Parker"
-//     },
-//     {
-//         'question': 'What is the name of the IronMan? ',
-//         'answer': "Tony Stark"
-//     },
-//     {
-//         'question': 'What is the name of the Batman? ',
-//         'answer': "Batman"
-//     }
-// ];
-
-// for (i = 0; i < SuperHero.length; i++) {
-//     play(SuperHero[i].question, SuperHero[i].answer);
-// };
-
-// let HighScore = 1;
-// if (score > HighScore) {
-//     console.log("Congo!, You are the Champion.")
-//     console.log("New HighScore is: " + score);
-// } else {
-//     console.log("Better luck Next Time");
-// }
-
-// -----------------------------------------------------------------------------------------------------------------------------
 let count = 0
 let queCount = 1;
 let userName = document.querySelector('#userName');
@@ -155,22 +109,28 @@ function nextQue() {
     quizQuestion.innerText = SuperHero[count].question;
 
 
-    // clearInterval(a);
-    // timeleft = 15;
-    // time.innerText = timeleft + "s";
-    // a = setInterval(updateTime, 1000);
-
-
     if (queCount == SuperHero.length) {
         clearInterval(a);
         // timeleft = 15;
         // a = setInterval(updateTime, 1000);
-        time.innerText = "Done"
+        let timeleft = 15;
+        myInterval = setInterval(finalTimer, 1000);
+        function finalTimer() {
+
+            time.innerText = timeleft + "s";
+            timeleft--;
+
+            if (timeleft == 0) {
+                clearInterval(myInterval)
+                time.innerText = "Done"
+                
+            }
+
+        }
     } else {
         clearInterval(a);
         timeleft = 15;
         time.innerText = timeleft + "s";
         a = setInterval(updateTime, 1000);
     }
-
 }
